@@ -46,7 +46,6 @@ def cFRQI(data, compression):
     while i < (2**k):
         # Reset the parity check
         pc = int(0)
-
         # Add RY gate
         for ind, arr in enumerate(data):
             if arr[i] != 0:
