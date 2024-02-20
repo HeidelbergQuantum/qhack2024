@@ -81,5 +81,5 @@ def cFRQI(data, compression):
                 if (pc >> j)  &  1:
                     circuit.cnot(permutation(j,ind,k), k+ind)
                 
-    return circuit#.reverse_bits()
-c = cFRQI(np.random.random((3,2**3)),0)
+    return circuit.reverse_bits()
+# c = cFRQI(np.random.random((3,2**3)),0)
