@@ -205,7 +205,7 @@ def decodeParallelQPIXL(state, qc, length ,max_pixel_val=255):
     print(len(qc.qubits)-length)
     for datum in range(length):
         to_trace = list(range(length))
-        popped = to_trace.pop((datum-length)%length)
+        popped = to_trace.pop(length-datum-1)
         to_trace = [qc.qubits[qub] for qub in to_trace]
         traced_over_qubits = [qc.qubits.index(qubit) for qubit in to_trace]
         print(traced_over_qubits)
