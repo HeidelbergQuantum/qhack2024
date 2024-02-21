@@ -19,7 +19,7 @@ def cFRQI(data, compression):
     Returns:
         QuantumCircuit: qiskit circuit that prepared the encoded image
     """
-    kernel = cudaq.make_kernel()
+    kernel, values = cudaq.make_kernel(data)
     
     for ind,a in enumerate(data): #convert 'a' point into 
         data[ind] = convertToAngles(data[ind]) # convert grayscale to angles
@@ -32,12 +32,7 @@ def cFRQI(data, compression):
         data[ind] = 2*data[ind]
         data[ind] = sfwht(data[ind])
         data[ind] = grayPermutation(data[ind]) 
-        a_sort_ind = np.argsort(np.abs(data[ind]))
 
-        # set smallest absolute values of a to zero according to compression param
-        cutoff = int((compression / 100.0) * n)
-        for it in a_sort_ind[:cutoff]:
-            data[ind][it] = 0
     qubits = kernel.qalloc(k + len(data))
     # Construct FRQI circuit
     # Hadamard register
@@ -49,7 +44,7 @@ def cFRQI(data, compression):
         # Reset the parity check
         pc = int(0)
         # Add RY gate
-        for ind, arr in enumerate(data):
+        for ind, arr in enumerate(values):
             if arr[i] != 0:
                 kernel.ry(arr[i], qubits[k+ind])
         # Loop over sequence of consecutive zero angles to 
