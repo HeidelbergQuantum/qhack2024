@@ -75,5 +75,5 @@ def cFRQI(data, compression):
                 if (pc >> j)  &  1:
                     kernel.cx(qubits[permutation(j,ind,k)], qubits[k+ind])
                 
-    return kernel#.reverse_bits()
-c = cFRQI(np.random.random((3,2**3)),0)
+    return kernel, values
+c,v = cFRQI(np.random.random((3,2**3)),0)
