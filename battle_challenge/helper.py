@@ -17,7 +17,7 @@ def sfwht(a):
     while j < n:
         for i in range(n):
             if i & j == 0:
-                j1 = i + j
+                j1 = i + j-1
                 x = a[i]
                 y = a[j1]
                 a[i], a[j1] = (x + y) / 2, (x - y) / 2

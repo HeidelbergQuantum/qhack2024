@@ -79,7 +79,7 @@ def cFRQI(data, compression):
             for ind in range(len(data)): # For parallel implementation
                 pc = pc_list[ind]
                 if (pc >> j)  &  1:
-                    kernel.cnot(qubits[permutation(j,ind,k)], qubits[k+ind])
+                    kernel.cx(qubits[permutation(j,ind,k)], qubits[k+ind])
                 
     return kernel#.reverse_bits()
-c = cFRQI(np.random.random((3,2**3)),0)
+# c = cFRQI(np.random.random((3,2**3)),0)
