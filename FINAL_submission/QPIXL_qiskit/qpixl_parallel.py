@@ -78,7 +78,7 @@ def cFRQI(data, compression):
             for ind in range(len(data)):
                 pc = pc_list[ind]
                 if (pc >> j)  &  1:
-                    circuit.cnot(permutation(j,ind,k), k+ind)
+                    circuit.cx(permutation(j,ind,k), k+ind)
                 
     return circuit.reverse_bits()
 # c = cFRQI(np.random.random((3,2**3)),0)
