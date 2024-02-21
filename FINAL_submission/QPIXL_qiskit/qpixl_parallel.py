@@ -5,7 +5,7 @@ def permutation(j,perm,total_data_qubits):
     j = (j-perm)%total_data_qubits
     return j
 
-def cFRQI(data, compression):
+def cFRQI(data, compression, additional_shift = 0):
     """    Takes a standard image in a numpy array (so that the matrix looks like
     the image you want if you picture the pixels) and returns the QPIXL
     compressed FRQI circuit. The compression ratio determines
@@ -78,7 +78,7 @@ def cFRQI(data, compression):
             for ind in range(len(data)):
                 pc = pc_list[ind]
                 if (pc >> j)  &  1:
-                    circuit.cx(permutation(j,ind,k), k+ind)
+                    circuit.cx(permutation(j,ind+additional_shift,k), k+ind)
                 
     return circuit.reverse_bits()
 # c = cFRQI(np.random.random((3,2**3)),0)
