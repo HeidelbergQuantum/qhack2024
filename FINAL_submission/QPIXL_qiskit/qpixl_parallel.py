@@ -13,8 +13,8 @@ def cFRQI(data, compression):
     https://www.nature.com/articles/s41598-022-11024-y
 
     Args:
-        a (np.array): numpy array of image, must be flattened and padded with zeros up to a power of two
-        compression (float): number between 0 an 100, where 0 is no compression and 100 is no image
+        a ([np.array, np.array]): array of flattened numpy arrays, must be flattened and padded with zeros up to a power of two
+        compression (float): number between 0 an 100, where 0 is no compression and 100 is no circuit
 
     Returns:
         QuantumCircuit: qiskit circuit that prepared the encoded image

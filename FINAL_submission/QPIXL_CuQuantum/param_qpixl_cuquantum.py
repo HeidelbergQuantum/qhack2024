@@ -82,4 +82,4 @@ def cFRQI(data, compression):
                     kernel.cnot(qubits[permutation(j,ind,k)], qubits[k+ind])
                 
     return kernel#.reverse_bits()
-# c = cFRQI(np.random.random((3,2**3)),0)
+c = cFRQI(np.random.random((3,2**3)),0)
