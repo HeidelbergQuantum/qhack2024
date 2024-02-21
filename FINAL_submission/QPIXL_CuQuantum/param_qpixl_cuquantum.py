@@ -19,7 +19,7 @@ def cFRQI(data, compression):
     Returns:
         QuantumCircuit: qiskit circuit that prepared the encoded image
     """
-    kernel, values = cudaq.make_kernel(data)
+    kernel, values = cudaq.make_kernel(list)
     
     for ind,a in enumerate(data): #convert 'a' point into 
         data[ind] = convertToAngles(data[ind]) # convert grayscale to angles
@@ -44,9 +44,8 @@ def cFRQI(data, compression):
         # Reset the parity check
         pc = int(0)
         # Add RY gate
-        for ind, arr in enumerate(values):
-            if arr[i] != 0:
-                kernel.ry(arr[i], qubits[k+ind])
+        for ind, arr in enumerate(data):
+            kernel.ry(values[i], qubits[k+ind])
         # Loop over sequence of consecutive zero angles to 
         # cancel out CNOTS (or rather, to not include them)
         if i == ((2**k) - 1):
