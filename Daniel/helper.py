@@ -1,7 +1,6 @@
 # qip/helper.py
 
-import numpy as np
-from qiskit.quantum_info import partial_trace
+from pennylane import numpy as np
 
 def sfwht(a):
     """Fast walsh hadamard transform with scaling
@@ -174,47 +173,6 @@ def decodeQPIXL(state,max_pixel_val=255, state_to_prob = np.abs):
     for i in range(0,len(state),2):
         pv[i//2]=np.arctan2(state[i+1],state[i])
     return convertToGrayscale(pv,max_pixel_val)
-def permute_bits(b,bitlength=8,shift=1):
-    """cyclic permutation of bits
-
-    Args:
-        b (integer): integer to be converted
-        bitlength (int, optional): how many bits do you want to permute in. Defaults to 8.
-        shift (int, optional): how many bits to shift. Defaults to 1.
-
-    Returns:
-        int: integer representation of bits
-    """
-    b = bin(b)
-    b = b[2:].zfill(bitlength)
-    b = [b[(i + shift) % len(b)] for i in range(len(b))]
-    return int(''.join(b),2)
-
-def decodeParallelQPIXL(state, qc, length ,max_pixel_val=255, state_to_prob = np.abs):
-    """Automatically decodes qpixl output statevector
-
-    Args:
-        state (statevector array): statevector from simulator - beware of bit ordering
-        qc (qiskit circuit): the circuit used for the state generation
-        max_pixel_val (int, optional): normalization value. Defaults to 255.
-        state_to_prob (function): If you made some transforms, your image 
-                                    may be complex, how would you 
-                                    like to make the vector real?
-    Returns:
-        np.array: your image, flat
-    """
-    decoded_data = []
-    for i in range(length):
-        dataset = i
-        traced_over_qubits = [qc.qubits.index(qubit) for qubit in [qc.qubits[dataset]]]
-        density_matrix = partial_trace(state, traced_over_qubits)
-        probs = density_matrix.probabilities()
-        test = decodeQPIXL(probs)
-        ordered = [test[permute_bits(i,12,dataset)] for i in range(len(test))]
-        decoded_data.append(convertToGrayscale(np.array(ordered),max_pixel_val))
-        
-    return decoded_data
-
 
 def reconstruct_img(pic_vec, shape: tuple):
     """reconstruct image from decoded statevector
