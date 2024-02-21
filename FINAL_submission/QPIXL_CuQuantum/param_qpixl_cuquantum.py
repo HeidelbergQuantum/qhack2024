@@ -45,7 +45,7 @@ def cFRQI(data, compression):
         pc = int(0)
         # Add RY gate
         for ind, arr in enumerate(data):
-            kernel.ry(values[i], qubits[k+ind])
+            kernel.ry(values[i+len(data[0])*ind], qubits[k+ind])
         # Loop over sequence of consecutive zero angles to 
         # cancel out CNOTS (or rather, to not include them)
         if i == ((2**k) - 1):
@@ -76,4 +76,4 @@ def cFRQI(data, compression):
                     kernel.cnot(qubits[permutation(j,ind,k)], qubits[k+ind])
                 
     return kernel#.reverse_bits()
-c = cFRQI(np.random.random((3,2**3)).tolist(),0)
+c = cFRQI(np.random.random((3,2**3)),0)
