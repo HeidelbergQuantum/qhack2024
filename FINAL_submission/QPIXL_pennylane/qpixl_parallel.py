@@ -79,6 +79,6 @@ def cFRQI(data, compression):
             for ind in range(len(data)):
                 pc = pc_list[ind]
                 if (pc >> j)  &  1:
-                    qml.CNOT(permutation(j,ind,k), k+ind)
+                    qml.CNOT([permutation(j,ind,k), k+ind])
                     
 # c = cFRQI(np.random.random((3,2**3)),0)
