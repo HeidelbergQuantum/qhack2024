@@ -1,7 +1,7 @@
 # qip/helper.py
 
 from pennylane import numpy as np
-
+import torch
 def sfwht(a):
     """Fast walsh hadamard transform with scaling
 
@@ -152,9 +152,10 @@ def pad_0(img):
     Returns:
         padded image: flattened image with appropiate padding for quantum algorithm
     """
-    img = np.array(img)
+    # img = np.array(img)
     img.flatten()
-    return np.pad(img,(0,nextpow2(len(img))-len(img)))
+    # return np.pad(img,(0,nextpow2(len(img))-len(img)))
+    return torch.nn.functional.pad(img, (0,nextpow2(len(img))-len(img)), mode='constant', value=0)
 
 def decodeQPIXL(state,max_pixel_val=255, state_to_prob = np.abs):
     """Automatically decodes qpixl output statevector
