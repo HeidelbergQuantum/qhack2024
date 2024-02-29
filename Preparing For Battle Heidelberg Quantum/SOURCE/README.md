@@ -5,14 +5,14 @@ This is our submission for QHack24 - it is an extension of the algorithm QPIXL (
     - Introduction
     - QPIXL (```QPIXL.ipynb```)
         - compression
-    - parallel QPIXL
+    - parallel QPIXL (```Parallel_QPIXL_submission.ipynb```)
     - Creative Uses
-        -  Photoshop
+        -  Photoshop (```QPIXL.ipynb```)
             - single image transforms
             - entangling multiple images
             - Simple RGB images
             - animation
-    - Scientific Uses
+    - Scientific Uses (```QPIXL.ipynb``` and ```Parallel_QPIXL_QML.ipynb```)
         - QNN with QPIXL embedding for Cancerous cell classification
             - Cancer Dataset with classical autoencoder preconditioning
             - Loading data with resnet18 autoencoder
